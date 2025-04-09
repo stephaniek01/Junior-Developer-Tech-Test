@@ -2,7 +2,7 @@
 
 import { UAParser } from 'ua-parser-js';
 import { VideoSource } from '../../types';
-import { getBrightcoveIds } from './api/videoService';
+// import { getBrightcoveIds } from './api/videoService';
 
 /**
  * Get the most optimised video source based on the user's browser/OS
@@ -23,13 +23,13 @@ export const getVideoSource = (sources: VideoSource[]) => {
 
   // fallback to mp4 if none of the other source types are present
   if (!currentSource)
-    currentSource = sources.find((s) => s.type?.includes('mp4'));
+    currentSource = sources.find((s) => s.container?.includes('MP4'));
 
   return currentSource;
 };
 
 export const fetchVideoMetaData = async () => {
-  const brightcoveIds = await getBrightcoveIds();
+  // const brightcoveIds = await getBrightcoveIds();
 
   // const promises = brightcoveIds?.map((brightcoveId) =>
   //   getVideoMetaDataFromID(brightcoveId.brightcoveId)

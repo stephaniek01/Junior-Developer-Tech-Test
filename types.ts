@@ -8,10 +8,10 @@ export type brightcoveIdResponse = {
 
 export type VideoSource = {
   src: string;
-  ext_x_version?: string;
-  type?: string;
   codecs?: string;
+  ext_x_version?: string;
   profiles?: string;
+  type?: string;
   avg_bitrate?: number;
   codec?: string;
   container?: string;
@@ -21,7 +21,7 @@ export type VideoSource = {
   width?: number;
 };
 
-type VideoTextTrack = {
+export type TextTrack = {
   id: string | null;
   account_id: string;
   src: string;
@@ -34,31 +34,38 @@ type VideoTextTrack = {
   default: boolean;
   width: number;
   height: number;
-  bandwidth: number;
+  bandwidth?: number;
 };
 
+// Define the type for the link object
+export type Link = {
+  text: string;
+  url: string;
+};
+
+// Define the main type for video metadata
 export type VideoMetaData = {
   poster: string;
   thumbnail: string;
   poster_sources: { src: string }[];
   thumbnail_sources: { src: string }[];
-  description: string | null;
+  description: string;
   tags: string[];
   cue_points: string[];
   custom_fields: Record<string, unknown>;
   account_id: string;
   sources: VideoSource[];
   name: string;
-  reference_id: string | null;
-  long_description: string | null;
+  reference_id: string;
+  long_description: string;
   duration: number;
   economics: string;
-  text_tracks: VideoTextTrack[];
+  text_tracks: TextTrack[];
   published_at: string;
   created_at: string;
   updated_at: string;
   offline_enabled: boolean;
-  link: string | null;
+  link: Link | string;
   id: string;
   ad_keys: string | null;
 };
