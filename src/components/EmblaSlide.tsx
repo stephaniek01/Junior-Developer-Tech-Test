@@ -37,6 +37,7 @@ const EmblaSlide = ({
         onPause={reactPlayerProps.onPause}
         onEnded={reactPlayerProps.onEnded}
       />
+      <h1>{videoMetaData.name}</h1>
     </div>
   );
 };

@@ -141,7 +141,8 @@ const EmblaCarousel = ({ videos }: Props) => {
     <div className="embla">
       <div className="embla__viewport overflow-hidden relative" ref={emblaRef}>
         <div className="embla__container flex">
-          {videos.map((videoData, index) => (
+          {videos.map((videoData, index) =>{
+            return (
             <EmblaSlide
               isActive={currentDisplayedSlide === index}
               playerRef={
@@ -153,7 +154,7 @@ const EmblaCarousel = ({ videos }: Props) => {
               onPlay={handlePlay}
               onPause={handlePause}
             />
-          ))}
+          )})}
         </div>
         {/* Navigation Buttons */}
         <EmblaNavigation scrollPrev={scrollPrev} scrollNext={scrollNext} />

@@ -15,15 +15,15 @@ export const getVideoSource = (sources: VideoSource[]) => {
 
   if (result.os.name === 'iOS' || result.browser.name === 'Safari') {
     // IOS and safari prefers mpegURL
-    currentSource = sources.find((s) => s.type?.includes('mpegURL'));
+    currentSource = sources.find((s) => s.type?.includes('mpegURL')  && s.src.includes('https'));
   } else {
     // modern browsers prefer DASH
-    currentSource = sources.find((s) => s.type?.includes('dash'));
+    currentSource = sources.find((s) => s.type?.includes('dash') && s.src.includes('https'));
   }
 
   // fallback to mp4 if none of the other source types are present
   if (!currentSource)
-    currentSource = sources.find((s) => s.container?.includes('MP4'));
+    currentSource = sources.find((s) => s.container?.includes('MP4') && s.src.includes('https'));
 
   return currentSource;
 };
