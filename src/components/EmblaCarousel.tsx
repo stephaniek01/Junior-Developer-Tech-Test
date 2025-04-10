@@ -30,7 +30,6 @@ const EmblaCarousel = ({ videos }: Props) => {
   }, [emblaApi]);
 
   const scrollNext = useCallback(() => {
-    console.log('scroll next');
 
     if (emblaApi) {
       // set the prev slides time to 0 and pause it
@@ -40,7 +39,6 @@ const EmblaCarousel = ({ videos }: Props) => {
   }, [emblaApi]);
 
   const startAutoScroll = useCallback(() => {
-    console.log('start auto scroll');
 
     if (autoScrollTimer.current) clearInterval(autoScrollTimer.current);
 
@@ -53,21 +51,17 @@ const EmblaCarousel = ({ videos }: Props) => {
   // React Player handlers
   // ********************************************************
   const onEnded = useCallback(() => {
-    console.log('ended');
     scrollNext();
   }, [scrollNext]);
 
   const handlePlay = () => {
-    console.log('play');
     if (autoScrollTimer.current) {
-      console.log('deleted');
       clearInterval(autoScrollTimer.current);
       autoScrollTimer.current = null;
     }
   };
 
   const handlePause = () => {
-    console.log('pause');
     startAutoScroll();
   };
 
@@ -96,7 +90,6 @@ const EmblaCarousel = ({ videos }: Props) => {
     if (!emblaApi) return;
 
     const onSelect = () => {
-      console.log('onselect');
       resetCurrentVideo();
       setCurrentDisplayedSlide(emblaApi.selectedScrollSnap());
     };
@@ -107,12 +100,14 @@ const EmblaCarousel = ({ videos }: Props) => {
     };
   }, [emblaApi, startAutoScroll]);
 
+  // add keyboard acessibility to the carosel 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.code === 'Space') {
         event.preventDefault(); // Prevent scrolling
         const player = currentPlayerRef.current?.getInternalPlayer?.();
 
+        // play/pause functionality
         if (player) {
           if (player.paused) {
             player.play();
@@ -122,15 +117,18 @@ const EmblaCarousel = ({ videos }: Props) => {
         }
       }
 
+      // scroll left 
       if (event.code === 'ArrowRight') {
         scrollNext();
       }
 
+      // scroll right
       if (event.code === 'ArrowLeft') {
         scrollPrev();
       }
     };
 
+    // add the event listener
     window.addEventListener('keydown', handleKeyDown);
     return () => {
       window.removeEventListener('keydown', handleKeyDown);

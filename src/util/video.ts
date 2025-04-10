@@ -35,7 +35,7 @@ export const fetchVideoMetaData = async () => {
     getVideoMetaDataFromID(brightcoveId.brightcoveId)
   );
 
-  const allVideoMetaData = await Promise.all(promises??[]);
+  const allVideoMetaData = (await Promise.all(promises??[])).filter(videoData => typeof videoData != 'undefined');
 
   return allVideoMetaData;
 };
