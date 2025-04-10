@@ -8,19 +8,15 @@ export async function GET() {
   const videos = [
     {
       _key: 'video1',
-      brightcoveId: '5510483493001',
+      brightcoveId: '6361867842112',
     },
     {
       _key: 'video2',
-      brightcoveId: '5510487311001',
+      brightcoveId: '6361737263112',
     },
     {
       _key: 'video3',
-      brightcoveId: '5510486328001',
-    },
-    {
-      _key: 'video4',
-      brightcoveId: '5701202551001',
+      brightcoveId: '6360358040112',
     },
   ];
 

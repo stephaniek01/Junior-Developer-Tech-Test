@@ -30,7 +30,6 @@ const EmblaCarousel = ({ videos }: Props) => {
   }, [emblaApi]);
 
   const scrollNext = useCallback(() => {
-
     if (emblaApi) {
       // set the prev slides time to 0 and pause it
       resetCurrentVideo();
@@ -39,7 +38,6 @@ const EmblaCarousel = ({ videos }: Props) => {
   }, [emblaApi]);
 
   const startAutoScroll = useCallback(() => {
-
     if (autoScrollTimer.current) clearInterval(autoScrollTimer.current);
 
     autoScrollTimer.current = setInterval(() => {
@@ -100,7 +98,7 @@ const EmblaCarousel = ({ videos }: Props) => {
     };
   }, [emblaApi, startAutoScroll]);
 
-  // add keyboard acessibility to the carosel 
+  // add keyboard acessibility to the carosel
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.code === 'Space') {
@@ -117,7 +115,7 @@ const EmblaCarousel = ({ videos }: Props) => {
         }
       }
 
-      // scroll left 
+      // scroll left
       if (event.code === 'ArrowRight') {
         scrollNext();
       }
@@ -139,20 +137,19 @@ const EmblaCarousel = ({ videos }: Props) => {
     <div className="embla">
       <div className="embla__viewport overflow-hidden relative" ref={emblaRef}>
         <div className="embla__container flex">
-          {videos.map((videoData, index) =>{
-            return (
+          {videos.map((videoData, index) => (
             <EmblaSlide
+              key={videoData.id}
               isActive={currentDisplayedSlide === index}
               playerRef={
                 currentDisplayedSlide === index ? currentPlayerRef : null
               }
               videoMetaData={videoData}
-              key={videoData.id}
               onEnded={onEnded}
               onPlay={handlePlay}
               onPause={handlePause}
             />
-          )})}
+          ))}
         </div>
         {/* Navigation Buttons */}
         <EmblaNavigation scrollPrev={scrollPrev} scrollNext={scrollNext} />
